@@ -58,7 +58,7 @@ class MenuSection extends StatelessWidget {
                       item.title,
                       item.colorFirst,
                       item.colorSecond,
-                      item.onTap,
+                      item.screen,
                     );
                   },
                 ),

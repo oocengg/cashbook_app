@@ -1,5 +1,6 @@
 import 'package:cashbook_app/core/constant/colors.dart';
 import 'package:cashbook_app/core/constant/font_size.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 Widget menuItemWidget(
@@ -8,10 +9,17 @@ Widget menuItemWidget(
   String title,
   Color colorFirst,
   Color colorSecond,
-  Function() onTap,
+  Widget screen,
 ) {
   return GestureDetector(
-    onTap: onTap,
+    onTap: () {
+      Navigator.push(
+        context,
+        CupertinoPageRoute(
+          builder: (context) => screen,
+        ),
+      );
+    },
     child: Container(
       padding: const EdgeInsets.all(16),
       width: MediaQuery.of(context).size.width,

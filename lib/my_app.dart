@@ -1,5 +1,6 @@
 import 'package:cashbook_app/core/constant/colors.dart';
 import 'package:cashbook_app/core/keys/navigator_key.dart';
+import 'package:cashbook_app/feature/add_income/provider/add_income_provider.dart';
 import 'package:cashbook_app/feature/auth/provider/login_provider.dart';
 import 'package:cashbook_app/feature/home/provider/chart_provider.dart';
 import 'package:cashbook_app/feature/home/provider/heading_provider.dart';
@@ -35,6 +36,11 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => MenuProvider(),
+        ),
+
+        // Menu Provider
+        ChangeNotifierProvider(
+          create: (context) => AddIncomeProvider(),
         ),
       ],
       child: MaterialApp(

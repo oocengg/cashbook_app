@@ -65,15 +65,9 @@ class HeadingSection extends StatelessWidget {
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(14),
-                        child: Image.network(
-                          '-',
+                        child: Image.asset(
+                          'assets/images/profile.jpg',
                           fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) {
-                            return Image.asset(
-                              'assets/images/profile.jpg',
-                              fit: BoxFit.cover,
-                            );
-                          },
                         ),
                       ),
                     ),
