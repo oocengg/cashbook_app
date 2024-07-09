@@ -46,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
         children: [
           Center(
             child: Image.asset(
-              'assets/images/splash_logo.png',
+              'assets/images/cashbook_logo.png',
               width: MediaQuery.of(context).size.width * 0.7,
             ),
             // Text('Splash Screen'),
