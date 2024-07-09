@@ -3,19 +3,19 @@ import 'package:cashbook_app/core/state/finite_state.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class AddIncomeProvider with ChangeNotifier {
-  AppState addIncomeState = AppState.initial;
+class AddOutcomeProvider with ChangeNotifier {
+  AppState addOutcomeState = AppState.initial;
 
   DateTime tanggalAddIncome = DateTime.now();
 
-  final GlobalKey<FormState> addIncomeFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> addOutcomeFormKey = GlobalKey<FormState>();
   final TextEditingController nominalController = TextEditingController();
   final TextEditingController keteranganController = TextEditingController();
 
   // Eksekusi fungsi dari home service untuk ambil Heading Data
-  Future<void> addIncome(BuildContext context) async {
+  Future<void> addOutcome(BuildContext context) async {
     try {
-      addIncomeState = AppState.loading;
+      addOutcomeState = AppState.loading;
       notifyListeners();
 
       await Future.delayed(const Duration(seconds: 2));
@@ -37,7 +37,7 @@ class AddIncomeProvider with ChangeNotifier {
                   width: 10,
                 ),
                 Flexible(
-                  child: Text('Sukses, tambah pemasukan berhasil dilakukan.'),
+                  child: Text('Sukses, tambah pengeluaran berhasil dilakukan.'),
                 ),
               ],
             ),
@@ -47,7 +47,7 @@ class AddIncomeProvider with ChangeNotifier {
         );
       }
 
-      addIncomeState = AppState.loaded;
+      addOutcomeState = AppState.loaded;
       notifyListeners();
     } catch (e) {
       if (context.mounted) {
@@ -63,7 +63,7 @@ class AddIncomeProvider with ChangeNotifier {
                   width: 10,
                 ),
                 Flexible(
-                  child: Text('Maaf, tambah pemasukan gagal dilakukan.'),
+                  child: Text('Maaf, tambah pengeluaran gagal dilakukan.'),
                 ),
               ],
             ),
@@ -72,7 +72,7 @@ class AddIncomeProvider with ChangeNotifier {
           ),
         );
       }
-      addIncomeState = AppState.failed;
+      addOutcomeState = AppState.failed;
       notifyListeners();
     }
   }

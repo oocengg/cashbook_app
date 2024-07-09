@@ -3,25 +3,25 @@ import 'package:cashbook_app/core/constant/font_size.dart';
 import 'package:cashbook_app/core/extensions/date_ext.dart';
 import 'package:cashbook_app/core/state/finite_state.dart';
 import 'package:cashbook_app/core/widgets/custom_text_form_field.dart';
-import 'package:cashbook_app/feature/add_income/provider/add_income_provider.dart';
+import 'package:cashbook_app/feature/add_outcome/provider/add_outcome_provider.dart';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 // import 'package:provider/provider.dart';
 
-class AddIncomeScreen extends StatefulWidget {
-  const AddIncomeScreen({super.key});
+class AddOutcomeScreen extends StatefulWidget {
+  const AddOutcomeScreen({super.key});
 
   @override
-  State<AddIncomeScreen> createState() => _AddIncomeScreenState();
+  State<AddOutcomeScreen> createState() => _AddOutcomeScreenState();
 }
 
-class _AddIncomeScreenState extends State<AddIncomeScreen> {
+class _AddOutcomeScreenState extends State<AddOutcomeScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<AddIncomeProvider>().clearFormInputan();
+      context.read<AddOutcomeProvider>().clearFormInputan();
     });
 
     super.initState();
@@ -33,7 +33,7 @@ class _AddIncomeScreenState extends State<AddIncomeScreen> {
       appBar: AppBar(
         centerTitle: false,
         title: const Text(
-          'Tambah Pemasukan',
+          'Tambah Pengeluaran',
           style: TextStyle(
             color: AppColors.white,
           ),
@@ -50,10 +50,10 @@ class _AddIncomeScreenState extends State<AddIncomeScreen> {
         backgroundColor: AppColors.blue500,
         shadowColor: AppColors.black.withOpacity(0.2),
       ),
-      body: Consumer<AddIncomeProvider>(
-        builder: (context, addIncomeProvider, _) {
+      body: Consumer<AddOutcomeProvider>(
+        builder: (context, addOutcomeProvider, _) {
           return Form(
-            key: addIncomeProvider.addIncomeFormKey,
+            key: addOutcomeProvider.addOutcomeFormKey,
             child: ListView(
               padding: const EdgeInsets.all(16),
               children: [
@@ -62,11 +62,11 @@ class _AddIncomeScreenState extends State<AddIncomeScreen> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(14),
-                    color: AppColors.success500,
+                    color: AppColors.error500,
                   ),
                   child: const Center(
                     child: Text(
-                      'Tambah Pemasukan',
+                      'Tambah Pengeluaran',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: AppFontSize.text,
@@ -80,7 +80,7 @@ class _AddIncomeScreenState extends State<AddIncomeScreen> {
                   height: 16,
                 ),
                 const Text(
-                  'Masukkan data inputan yang valid untuk mencatat informasi uang masuk anda.',
+                  'Masukkan data inputan yang valid untuk mencatat informasi uang keluar anda.',
                   style: TextStyle(
                     fontSize: AppFontSize.text,
                     color: AppColors.black,
@@ -117,7 +117,7 @@ class _AddIncomeScreenState extends State<AddIncomeScreen> {
                       Flexible(
                         child: Text(
                           formatDateddMMMMyyyy(
-                            addIncomeProvider.tanggalAddIncome.toString(),
+                            addOutcomeProvider.tanggalAddIncome.toString(),
                           ),
                           style: const TextStyle(
                             fontSize: AppFontSize.text,
@@ -128,7 +128,7 @@ class _AddIncomeScreenState extends State<AddIncomeScreen> {
                       ),
                       IconButton(
                         onPressed: () async {
-                          addIncomeProvider.selectDate(context);
+                          addOutcomeProvider.selectDate(context);
                         },
                         icon: const Icon(
                           FontAwesomeIcons.calendar,
@@ -158,9 +158,9 @@ class _AddIncomeScreenState extends State<AddIncomeScreen> {
                       child: TextFormField(
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
-                        controller: addIncomeProvider.nominalController,
+                        controller: addOutcomeProvider.nominalController,
                         validator: (value) =>
-                            addIncomeProvider.validateNominal(value, context),
+                            addOutcomeProvider.validateNominal(value, context),
                         decoration: InputDecoration(
                           prefixIcon: Container(
                             padding: const EdgeInsets.only(
@@ -250,16 +250,16 @@ class _AddIncomeScreenState extends State<AddIncomeScreen> {
                 CustomTextFormField(
                   textInputAction: TextInputAction.done,
                   validator: (value) => null,
-                  controller: addIncomeProvider.keteranganController,
+                  controller: addOutcomeProvider.keteranganController,
                   enable: true,
                   obscureText: false,
                   maxLines: 5,
-                  hint: "Tambahkan keterangan pemasukan anda",
+                  hint: "Tambahkan keterangan pengeluaran anda",
                 ),
                 const SizedBox(
                   height: 24,
                 ),
-                addIncomeProvider.addIncomeState == AppState.loading
+                addOutcomeProvider.addOutcomeState == AppState.loading
                     ? const Center(
                         child: CircularProgressIndicator(
                           color: AppColors.primary500,
@@ -269,9 +269,10 @@ class _AddIncomeScreenState extends State<AddIncomeScreen> {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () async {
-                            if (addIncomeProvider.addIncomeFormKey.currentState!
+                            if (addOutcomeProvider
+                                .addOutcomeFormKey.currentState!
                                 .validate()) {
-                              addIncomeProvider.addIncome(context);
+                              addOutcomeProvider.addOutcome(context);
                             }
                           },
                           style: const ButtonStyle(

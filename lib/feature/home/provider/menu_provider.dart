@@ -1,6 +1,7 @@
 import 'package:cashbook_app/core/constant/colors.dart';
 import 'package:cashbook_app/core/state/finite_state.dart';
 import 'package:cashbook_app/feature/add_income/views/add_income_screen.dart';
+import 'package:cashbook_app/feature/add_outcome/views/add_outcome_screen.dart';
 import 'package:cashbook_app/feature/home/models/model/item_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class MenuProvider with ChangeNotifier {
       title: 'Tambah\nPengeluaran',
       colorFirst: AppColors.error400,
       colorSecond: AppColors.error100,
-      screen: const AddIncomeScreen(),
+      screen: const AddOutcomeScreen(),
     ),
     ItemModel(
       image: 'assets/images/cash_history.png',
