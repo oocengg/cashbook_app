@@ -4,6 +4,7 @@ import 'package:cashbook_app/feature/add_income/views/add_income_screen.dart';
 import 'package:cashbook_app/feature/add_outcome/views/add_outcome_screen.dart';
 import 'package:cashbook_app/feature/detail_cashflow/views/detail_cashflow_screen.dart';
 import 'package:cashbook_app/feature/home/models/model/item_model.dart';
+import 'package:cashbook_app/feature/settings/views/settings_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -39,7 +40,7 @@ class MenuProvider with ChangeNotifier {
       title: 'Pengaturan\n',
       colorFirst: AppColors.neutral500,
       colorSecond: AppColors.neutral100,
-      screen: const AddIncomeScreen(),
+      screen: const SettingsScreen(),
     ),
   ];
 

@@ -8,6 +8,7 @@ import 'package:cashbook_app/feature/home/provider/chart_provider.dart';
 import 'package:cashbook_app/feature/home/provider/heading_provider.dart';
 import 'package:cashbook_app/feature/home/provider/menu_provider.dart';
 import 'package:cashbook_app/feature/home/provider/resume_provider.dart';
+import 'package:cashbook_app/feature/settings/provider/settings_provider.dart';
 import 'package:cashbook_app/feature/splash/views/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -49,6 +50,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => DetailCashflowProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => SettingsProvider(),
         ),
       ],
       child: MaterialApp(
