@@ -2,6 +2,7 @@ import 'package:cashbook_app/core/constant/colors.dart';
 import 'package:cashbook_app/core/state/finite_state.dart';
 import 'package:cashbook_app/feature/add_income/views/add_income_screen.dart';
 import 'package:cashbook_app/feature/add_outcome/views/add_outcome_screen.dart';
+import 'package:cashbook_app/feature/detail_cashflow/views/detail_cashflow_screen.dart';
 import 'package:cashbook_app/feature/home/models/model/item_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,7 @@ class MenuProvider with ChangeNotifier {
       title: 'Detail\nCashflow',
       colorFirst: AppColors.mint500,
       colorSecond: AppColors.mint100,
-      screen: const AddIncomeScreen(),
+      screen: const DetailCashflowScreen(),
     ),
     ItemModel(
       image: 'assets/images/settings.png',

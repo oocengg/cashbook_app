@@ -3,9 +3,7 @@ import 'package:cashbook_app/core/constant/font_size.dart';
 import 'package:cashbook_app/core/state/finite_state.dart';
 import 'package:cashbook_app/feature/home/provider/resume_provider.dart';
 import 'package:cashbook_app/feature/home/widgets/loading/resume_loading.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class ResumeSection extends StatelessWidget {

@@ -3,6 +3,7 @@ import 'package:cashbook_app/core/keys/navigator_key.dart';
 import 'package:cashbook_app/feature/add_income/provider/add_income_provider.dart';
 import 'package:cashbook_app/feature/add_outcome/provider/add_outcome_provider.dart';
 import 'package:cashbook_app/feature/auth/provider/login_provider.dart';
+import 'package:cashbook_app/feature/detail_cashflow/provider/detail_cashflow_provider.dart';
 import 'package:cashbook_app/feature/home/provider/chart_provider.dart';
 import 'package:cashbook_app/feature/home/provider/heading_provider.dart';
 import 'package:cashbook_app/feature/home/provider/menu_provider.dart';
@@ -45,6 +46,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => AddOutcomeProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => DetailCashflowProvider(),
         ),
       ],
       child: MaterialApp(
