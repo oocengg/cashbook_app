@@ -29,11 +29,11 @@ class HeadingSection extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Expanded(
+                    Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             'Halo!',
                             style: TextStyle(
                               fontSize: AppFontSize.heading4,
@@ -41,8 +41,8 @@ class HeadingSection extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            'Fauzi Nugraha',
-                            style: TextStyle(
+                            headingProvider.username ?? 'User',
+                            style: const TextStyle(
                               fontSize: AppFontSize.heading3,
                               fontWeight: FontWeight.bold,
                               overflow: TextOverflow.ellipsis,

@@ -20,7 +20,7 @@ class MenuLoading extends StatelessWidget {
             baseColor: AppColors.baseShimmerColor,
             highlightColor: AppColors.highlightShimmerColor,
             child: Container(
-              width: MediaQuery.of(context).size.width * 0.5,
+              width: MediaQuery.of(context).size.width * 0.2,
               height: 30,
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
@@ -40,7 +40,7 @@ class MenuLoading extends StatelessWidget {
                   highlightColor: AppColors.highlightShimmerColor,
                   child: Container(
                     width: double.infinity,
-                    height: 80,
+                    height: 130,
                     clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(
                       color: const Color(0xFFF1EFEF),
@@ -58,7 +58,47 @@ class MenuLoading extends StatelessWidget {
                   highlightColor: AppColors.highlightShimmerColor,
                   child: Container(
                     width: double.infinity,
-                    height: 80,
+                    height: 130,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF1EFEF),
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: Shimmer.fromColors(
+                  baseColor: AppColors.baseShimmerColor,
+                  highlightColor: AppColors.highlightShimmerColor,
+                  child: Container(
+                    width: double.infinity,
+                    height: 130,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF1EFEF),
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 8,
+              ),
+              Expanded(
+                child: Shimmer.fromColors(
+                  baseColor: AppColors.baseShimmerColor,
+                  highlightColor: AppColors.highlightShimmerColor,
+                  child: Container(
+                    width: double.infinity,
+                    height: 130,
                     clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(
                       color: const Color(0xFFF1EFEF),

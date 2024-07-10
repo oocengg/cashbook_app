@@ -4,7 +4,6 @@ import 'package:cashbook_app/core/constant/font_size.dart';
 import 'package:cashbook_app/core/state/finite_state.dart';
 import 'package:cashbook_app/core/widgets/custom_text_form_field.dart';
 import 'package:cashbook_app/feature/auth/provider/login_provider.dart';
-import 'package:cashbook_app/feature/auth/views/sign_up_screen.dart';
 import 'package:cashbook_app/feature/home/views/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -12,20 +11,19 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<LoginProvider>().clearLoginData();
     });
-
     super.initState();
   }
 
@@ -36,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Consumer<LoginProvider>(
         builder: (context, loginProvider, _) {
           return Form(
-            key: loginProvider.loginFormKey,
+            key: loginProvider.signUpFormKey,
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         FadeInUp(
                           duration: const Duration(milliseconds: 1100),
                           child: const Text(
-                            "Silahkan login untuk masuk kedalam sistem",
+                            "Silahkan sign up untuk mendaftar sistem kedalam sistem",
                             style: TextStyle(
                               color: AppColors.neutral500,
                               fontWeight: FontWeight.normal,
@@ -121,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         const SizedBox(
                           height: 32,
                         ),
-                        loginProvider.loginState == AppState.loading
+                        loginProvider.signUpState == AppState.loading
                             ? const Center(
                                 child: CircularProgressIndicator(
                                   color: AppColors.primary500,
@@ -131,16 +129,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                 duration: const Duration(milliseconds: 1300),
                                 child: MaterialButton(
                                   onPressed: () async {
-                                    if (loginProvider.loginFormKey.currentState!
+                                    if (loginProvider
+                                        .signUpFormKey.currentState!
                                         .validate()) {
-                                      await loginProvider.login(
+                                      await loginProvider.signUp(
                                         context,
                                         loginProvider.usernameController.text,
                                         loginProvider.passwordController.text,
                                       );
 
                                       if (context.mounted) {
-                                        if (loginProvider.loginState ==
+                                        if (loginProvider.signUpState ==
                                             AppState.loaded) {
                                           Navigator.of(context).pushReplacement(
                                             CupertinoPageRoute(
@@ -164,8 +163,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                                       width: 10,
                                                     ),
                                                     Flexible(
-                                                        child: Text(
-                                                            'Maaf, Username atau Password yang anda masukkan salah.')),
+                                                      child: Text(
+                                                        'Maaf, Username atau Password yang anda masukkan salah.',
+                                                      ),
+                                                    ),
                                                   ],
                                                 ),
                                                 backgroundColor:
@@ -186,7 +187,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   height: 50,
                                   child: const Center(
                                     child: Text(
-                                      "Login",
+                                      "Sign Up",
                                       style: TextStyle(
                                         fontSize: AppFontSize.heading5,
                                         color: Colors.white,
@@ -202,24 +203,18 @@ class _LoginScreenState extends State<LoginScreen> {
                           duration: const Duration(milliseconds: 1400),
                           child: RichText(
                             text: TextSpan(
-                              text: 'Belum punya akun? ',
+                              text: 'Sudah punya akun? ',
                               style: const TextStyle(color: Colors.black),
                               children: <TextSpan>[
                                 TextSpan(
-                                  text: 'Sign Up',
+                                  text: 'Login',
                                   style: const TextStyle(
                                     color: Colors.blue,
                                     decoration: TextDecoration.underline,
                                   ),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
-                                      Navigator.push(
-                                        context,
-                                        CupertinoPageRoute(
-                                          builder: (context) =>
-                                              const SignUpScreen(),
-                                        ),
-                                      );
+                                      Navigator.pop(context);
                                     },
                                 ),
                               ],

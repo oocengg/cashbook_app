@@ -19,8 +19,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   onInitCalled() {
     context.read<HeadingProvider>().getHeadingData();
-    context.read<ChartProvider>().getChartData();
-    context.read<ResumeProvider>().getResumeData();
+    context.read<ChartProvider>().getChartData(context);
+    context.read<ResumeProvider>().getResumeData(context);
     context.read<MenuProvider>().loadingMenuData();
   }
 

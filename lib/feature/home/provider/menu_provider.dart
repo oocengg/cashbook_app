@@ -44,17 +44,12 @@ class MenuProvider with ChangeNotifier {
     ),
   ];
 
-  // Eksekusi fungsi dari home service untuk ambil Heading Data
   void loadingMenuData() async {
-    // SharedPreferences preferences = await SharedPreferences.getInstance();
-
     try {
       menuState = AppState.loading;
       notifyListeners();
 
-      // user = await homeService.getHeadingData(id: preferences.getString('id')!);
-
-      await Future.delayed(const Duration(seconds: 3));
+      await Future.delayed(const Duration(seconds: 1));
 
       menuState = AppState.loaded;
       notifyListeners();

@@ -41,41 +41,43 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primary500,
+      backgroundColor: AppColors.blue500,
       body: Stack(
         children: [
           Center(
-            child: Image.asset(
-              'assets/images/cashbook_logo.png',
-              width: MediaQuery.of(context).size.width * 0.7,
-            ),
-            // Text('Splash Screen'),
-          ),
-          Positioned(
-            bottom: 35,
-            right: 0,
-            left: 0,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  'POWERED BY',
-                  style: TextStyle(
-                    fontSize: AppFontSize.caption,
-                    fontWeight: FontWeight.normal,
-                    letterSpacing: 1.5,
-                    color: Colors.white,
-                  ),
+                Image.asset(
+                  'assets/images/cashbook_logo.png',
+                  width: MediaQuery.of(context).size.width * 0.7,
                 ),
-                Center(
-                  child: Image.asset(
-                    'assets/images/powered_by.png',
-                    height: 60,
+                const Text(
+                  'CatatKas',
+                  style: TextStyle(
+                    fontSize: AppFontSize.heading3,
+                    fontWeight: FontWeight.bold,
+                    overflow: TextOverflow.ellipsis,
+                    color: AppColors.white,
                   ),
-                  // Text('Splash Screen'),
                 ),
               ],
+            ),
+          ),
+          const Positioned(
+            bottom: 20,
+            right: 0,
+            left: 0,
+            child: Center(
+              child: Text(
+                'Muh. Fauzi Ramadhan N',
+                style: TextStyle(
+                  fontSize: AppFontSize.caption,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.white,
+                ),
+              ),
             ),
           )
         ],

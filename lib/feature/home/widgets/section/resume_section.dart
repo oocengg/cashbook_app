@@ -55,13 +55,13 @@ class ResumeSection extends StatelessWidget {
                             ),
                           ],
                         ),
-                        child: const Padding(
-                          padding: EdgeInsets.all(16),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
+                              const Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
@@ -84,12 +84,12 @@ class ResumeSection extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 8,
                               ),
                               Text(
-                                'Rp. 1.500.000.000',
-                                style: TextStyle(
+                                'Rp. ${resumeProvider.totalIncome.toStringAsFixed(0)}',
+                                style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: AppFontSize.text,
                                   fontWeight: FontWeight.bold,
@@ -110,12 +110,6 @@ class ResumeSection extends StatelessWidget {
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(14),
-                          // image: const DecorationImage(
-                          //   image: AssetImage(
-                          //     'assets/images/header-bg.png',
-                          //   ),
-                          //   fit: BoxFit.cover,
-                          // ),
                           color: AppColors.error500,
                           boxShadow: [
                             BoxShadow(
@@ -126,13 +120,13 @@ class ResumeSection extends StatelessWidget {
                             ),
                           ],
                         ),
-                        child: const Padding(
-                          padding: EdgeInsets.all(16),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
+                              const Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
@@ -155,12 +149,12 @@ class ResumeSection extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 8,
                               ),
                               Text(
-                                'Rp. 1.500',
-                                style: TextStyle(
+                                'Rp. ${resumeProvider.totalOutcome.toStringAsFixed(0)}',
+                                style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: AppFontSize.text,
                                   fontWeight: FontWeight.bold,

@@ -19,7 +19,7 @@ class _DetailCashflowScreenState extends State<DetailCashflowScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<DetailCashflowProvider>().getCashflowData();
+      context.read<DetailCashflowProvider>().getCashflowData(context);
     });
 
     super.initState();
@@ -55,76 +55,36 @@ class _DetailCashflowScreenState extends State<DetailCashflowScreen> {
           } else if (detailCashflowProvider.cashflowState == AppState.loading) {
             return const CashflowLoading();
           } else if (detailCashflowProvider.cashflowState == AppState.loaded) {
-            return RefreshIndicator(
-              onRefresh: () async {
-                detailCashflowProvider.getCashflowData();
-              },
-              child: ListView(
-                padding: const EdgeInsets.all(16),
-                children: [
-                  cashflowItemWidget(
-                    context,
-                    true,
-                    'Rp. 250.000',
-                    'Dapat bayaran panitia sertifikasi',
-                    DateTime.now(),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  cashflowItemWidget(
-                    context,
-                    false,
-                    'Rp. 250.000',
-                    'Biaya sertifikasi',
-                    DateTime.now(),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  cashflowItemWidget(
-                    context,
-                    true,
-                    'Rp. 250.000',
-                    'Dapat bayaran panitia sertifikasi',
-                    DateTime.now(),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  cashflowItemWidget(
-                    context,
-                    false,
-                    'Rp. 250.000',
-                    'Biaya sertifikasi',
-                    DateTime.now(),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  cashflowItemWidget(
-                    context,
-                    true,
-                    'Rp. 250.000',
-                    'Dapat bayaran panitia sertifikasi',
-                    DateTime.now(),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  cashflowItemWidget(
-                    context,
-                    false,
-                    'Rp. 250.000',
-                    'Biaya sertifikasi',
-                    DateTime.now(),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                ],
-              ),
-            );
+            return detailCashflowProvider.transactions.isEmpty
+                ? const Center(
+                    child: Text('Belum ada transaksi yang dilakukan.'),
+                  )
+                : RefreshIndicator(
+                    onRefresh: () async {
+                      detailCashflowProvider.getCashflowData(context);
+                    },
+                    child: ListView.separated(
+                      padding: const EdgeInsets.all(16),
+                      itemCount: detailCashflowProvider.transactions.length,
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(
+                          height: 8,
+                        );
+                      },
+                      itemBuilder: (context, index) {
+                        var transaction =
+                            detailCashflowProvider.transactions[index];
+                        bool isIncome = transaction['type'] == 'income';
+                        return cashflowItemWidget(
+                          context,
+                          isIncome,
+                          'Rp. ${transaction['amount'].toString()}',
+                          transaction['description'],
+                          DateTime.parse(transaction['date']),
+                        );
+                      },
+                    ),
+                  );
           } else {
             return const SizedBox.shrink();
           }

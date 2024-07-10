@@ -1,30 +1,104 @@
+import 'package:cashbook_app/core/constant/colors.dart';
+import 'package:cashbook_app/core/services/db_helper.dart';
 import 'package:cashbook_app/core/state/finite_state.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsProvider with ChangeNotifier {
-  AppState settingsState = AppState.loading;
   AppState changePasswordState = AppState.initial;
+  AppState stateLogout = AppState.initial;
 
   final GlobalKey<FormState> changePasswordFormkey = GlobalKey<FormState>();
   final TextEditingController oldPassController = TextEditingController();
   final TextEditingController newPassController = TextEditingController();
 
-  // Eksekusi fungsi dari home service untuk ambil Heading Data
-  void getSettingsData() async {
-    // SharedPreferences preferences = await SharedPreferences.getInstance();
+  String error = '';
+
+  void changePassword(BuildContext context) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    int? userId = preferences.getInt('userId');
+    String? username = preferences.getString('username');
+
+    if (userId == null) {
+      // Handle error jika userId tidak ditemukan
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Row(
+            children: [
+              Icon(
+                FontAwesomeIcons.circleXmark,
+                color: Colors.white,
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Flexible(
+                child: Text('User tidak ditemukan, silakan login kembali'),
+              ),
+            ],
+          ),
+          backgroundColor: AppColors.error500,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+
+      return;
+    }
+
+    changePasswordState = AppState.loading;
+    notifyListeners();
 
     try {
-      settingsState = AppState.loading;
-      notifyListeners();
+      var dbHelper = DBHelper();
 
-      // user = await homeService.getHeadingData(id: preferences.getString('id')!);
+      // Get user details
+      Map<String, dynamic>? user = await dbHelper.getUserByUsernameAndPassword(
+          username ?? '', oldPassController.text);
 
-      await Future.delayed(const Duration(seconds: 3));
+      if (user != null) {
+        // Update password
+        await dbHelper.updateUserPassword(
+            username ?? '', newPassController.text);
+        error = '';
 
-      settingsState = AppState.loaded;
-      notifyListeners();
+        clearFormInputan();
+
+        await Future.delayed(const Duration(seconds: 2));
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Row(
+              children: [
+                Icon(
+                  FontAwesomeIcons.circleCheck,
+                  color: Colors.white,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Flexible(
+                  child: Text('Sukses, password berhasil diganti.'),
+                ),
+              ],
+            ),
+            backgroundColor: AppColors.success500,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+
+        changePasswordState = AppState.loaded;
+        notifyListeners();
+      } else {
+        error = "Current password is incorrect";
+
+        clearFormInputan();
+
+        changePasswordState = AppState.failed;
+        notifyListeners();
+      }
     } catch (e) {
-      settingsState = AppState.failed;
+      changePasswordState = AppState.failed;
       notifyListeners();
     }
   }
@@ -42,5 +116,26 @@ class SettingsProvider with ChangeNotifier {
     }
 
     return null; // validasi berhasil
+  }
+
+  // Fungsi untuk user logout dari aplikasi
+  Future<void> logout(BuildContext context) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+
+    stateLogout = AppState.loading;
+    notifyListeners();
+
+    try {
+      await Future.delayed(const Duration(seconds: 3));
+      preferences.remove("id");
+      preferences.remove("username");
+      preferences.setBool("isLoggedIn", false);
+
+      stateLogout = AppState.loaded;
+      notifyListeners();
+    } catch (e) {
+      stateLogout = AppState.failed;
+      notifyListeners();
+    }
   }
 }

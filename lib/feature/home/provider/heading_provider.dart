@@ -1,24 +1,20 @@
 import 'package:cashbook_app/core/state/finite_state.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HeadingProvider with ChangeNotifier {
   AppState headingState = AppState.loading;
 
-  // List<FaqResponseModel> faqData = [];
+  String? username = '';
 
-  // HomeService homeService = HomeService();
-  // // Ini Data User yang login, jadi bisa dipakai untuk mengambil nama dan foto di home
-  // HeadingModel? user;
-
-  // Eksekusi fungsi dari home service untuk ambil Heading Data
   void getHeadingData() async {
-    // SharedPreferences preferences = await SharedPreferences.getInstance();
+    SharedPreferences preferences = await SharedPreferences.getInstance();
 
     try {
       headingState = AppState.loading;
       notifyListeners();
 
-      // user = await homeService.getHeadingData(id: preferences.getString('id')!);
+      username = preferences.getString('username');
 
       await Future.delayed(const Duration(seconds: 1));
 
